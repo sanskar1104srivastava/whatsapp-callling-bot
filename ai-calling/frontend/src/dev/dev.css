@@ -1,0 +1,16 @@
+/* Local shell only (not copied into Rekon-AI): ivory page background + a collapsible sidebar on small screens. */
+body { background: #fbfaf4; }
+.content { background: #fbfaf4; }
+.dev-menu-btn { display: none; }
+@media (max-width: 880px) {
+  .app-shell { flex-direction: column; }
+  .dev-topbar { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 1rem; background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+  .dev-menu-btn { display: inline-flex; border: 1.5px solid var(--border); background: #fff; border-radius: 8px; padding: 0.35rem 0.5rem; cursor: pointer; }
+  .sidebar { position: fixed; left: 0; top: 0; height: 100vh; transform: translateX(-105%); transition: transform .2s ease; z-index: 40; box-shadow: var(--shadow-lg); }
+  .sidebar.open { transform: translateX(0); }
+  .dev-scrim { position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 30; }
+  .content { padding: 1.1rem 1rem; }
+}
+@media (min-width: 881px) { .dev-topbar, .dev-scrim { display: none; } }
+@media (prefers-reduced-motion: reduce) { .sidebar { transition: none; } }
+.content { min-width: 0; }

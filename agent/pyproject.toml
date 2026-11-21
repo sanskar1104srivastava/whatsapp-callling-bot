@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "AlgoFlow"
+version = "1.0.0"
+description = "Calling Agent with dynamic context"
+requires-python = ">=3.10"
+
+dependencies = [
+    # Core LiveKit — pin minor, allow patches
+    "livekit-agents[cerebras,deepgram,google,groq,openai,sarvam,silero,turn-detector]~=1.5",
+
+    # Plugins not covered by extras
+    "livekit-plugins-noise-cancellation",
+    "livekit-plugins-elevenlabs",
+    "livekit-plugins-aws",
+
+    # AWS
+    "boto3>=1.40.61",
+    "watchtower",
+
+    # App
+    "python-dotenv",
+    "pandas",
+    "pydantic",
+    "numpy",
+    "soundfile",
+
+    # Keep only if you call Sarvam REST API directly outside LiveKit
+    # "sarvamai",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "B", "A", "C4", "UP", "SIM", "RUF"]
+ignore = ["E501"]  # Line too long (handled by formatter)
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
